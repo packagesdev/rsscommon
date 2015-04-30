@@ -128,7 +128,7 @@
 
 #pragma mark -
 
-- (void)window:(NSWindow *)inWindow modifierFlagsDidChange:(NSEventModifierFlags) inModifierFlags
+- (void)window:(NSWindow *)inWindow modifierFlagsDidChange:(NSUInteger) inModifierFlags
 {
 	NSRect tOriginalFrame=[self->cancelButton frame];
 	
