@@ -23,6 +23,8 @@
 
 @interface RSSConfigurationWindowController () <RSSWindowDelegate>
 {
+	NSRect _savedCancelButtonFrame;
+	
 	BOOL _mainScreenSetting;
 }
 
@@ -60,6 +62,13 @@
 - (NSString *)windowNibName
 {
 	return NSStringFromClass([self class]);
+}
+
+- (void)windowDidLoad
+{
+	[super windowDidLoad];
+	
+	_savedCancelButtonFrame=[self->cancelButton frame];
 }
 
 #pragma mark -
@@ -130,29 +139,33 @@
 
 - (void)window:(NSWindow *)inWindow modifierFlagsDidChange:(NSUInteger) inModifierFlags
 {
-	NSRect tOriginalFrame=[self->cancelButton frame];
-	
 	if ((inModifierFlags & NSAlternateKeyMask) == NSAlternateKeyMask)
 	{
+		NSRect tOriginalFrame=[self->cancelButton frame];
+		
 		[self->cancelButton setTitle:NSLocalizedStringFromTableInBundle(@"Reset",@"Localizable",[NSBundle bundleForClass:[self class]],@"")];
 		[self->cancelButton setAction:@selector(resetDialogSettings:)];
+		
+		[self->cancelButton sizeToFit];
+		
+		NSRect tFrame=[self->cancelButton frame];
+		
+		tFrame.size.width+=10.0;	// To compensate for sizeToFit stupidity
+		
+		if (NSWidth(tFrame)<84.0)
+			tFrame.size.width=84.0;
+		
+		tFrame.origin.x=NSMaxX(tOriginalFrame)-NSWidth(tFrame);
+		
+		[self->cancelButton setFrame:tFrame];
 	}
 	else
 	{
 		[self->cancelButton setTitle:NSLocalizedStringFromTableInBundle(@"Cancel",@"Localizable",[NSBundle bundleForClass:[self class]],@"")];
 		[self->cancelButton setAction:@selector(closeDialog:)];
+		
+		[self->cancelButton setFrame:_savedCancelButtonFrame];
 	}
-	
-	[self->cancelButton sizeToFit];
-	
-	NSRect tFrame=[self->cancelButton frame];
-	
-	if (NSWidth(tFrame)<84.0)
-		tFrame.size.width=84.0;
-	
-	tFrame.origin.x=NSMaxX(tOriginalFrame)-NSWidth(tFrame);
-	
-	[self->cancelButton setFrame:tFrame];
 }
 
 @end
