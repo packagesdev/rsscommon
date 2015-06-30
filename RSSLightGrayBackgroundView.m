@@ -27,6 +27,10 @@
     [[NSColor colorWithDeviceWhite:0.915 alpha:0.8] set];
     
     NSRectFillUsingOperation(dirtyRect, NSCompositeSourceOver);
+	
+	[[NSColor colorWithDeviceWhite:0.87 alpha:1.0] set];
+	
+	NSFrameRect([self bounds]);
 }
 
 @end
