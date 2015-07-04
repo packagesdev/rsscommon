@@ -42,7 +42,10 @@
 							   @"RSSLightGrayBackgroundView",
 							   @"RSSSecondaryBox",
 							   @"RSSSettings",
-							   @"RSSWindow"];
+							   @"RSSWindow",
+							   @"RSSCollectionViewItemLabel",
+							   @"RSSCollectionViewItem",
+							   @"RSSCollectionView"];
 		
 		_renamableFiles=@[@"RSSAboutBoxWindowController.nib"];
 	}
