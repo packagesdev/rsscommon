@@ -49,7 +49,7 @@ NSString * const RSSCollectionViewRepresentedObjectTag=@"tag";
 	_thumbnail=inThumbnail;
 	
 	if (_thumbnail!=nil)
-		[_thumbnailImageView setImage:[NSImage imageNamed:_thumbnail]];
+		[_thumbnailImageView setImage:[[NSBundle bundleForClass:[self class]] imageForResource:_thumbnail]];
 	else
 		[_thumbnailImageView setImage:nil];
 }
