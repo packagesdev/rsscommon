@@ -91,9 +91,16 @@
 	
 	tBoundingRect=[tString boundingRectWithSize:tRoundRect.size options:0 attributes:tAttributes];
 	
-	if (tBoundingRect.size.width<(tRoundRect.size.width-2*(tRadius+RSSCOLLECTIONVIEWITEMLABEL_TEXT_INSET)))
+	if (tBoundingRect.size.width<=(tRoundRect.size.width-2*(tRadius+RSSCOLLECTIONVIEWITEMLABEL_TEXT_INSET)))
+	{
 		tRoundRect.size.width=tBoundingRect.size.width+2*(tRadius+RSSCOLLECTIONVIEWITEMLABEL_TEXT_INSET);
-	
+		
+		[self setToolTip:nil];
+	}
+	else
+	{
+		[self setToolTip:tString];
+	}
 	
 	tRoundRect.origin.x=round(NSMidX(tBounds)-NSWidth(tRoundRect)*0.5);
 	
