@@ -15,7 +15,7 @@
 
 @implementation RSSSecondaryBox
 
-- (BOOL) isOpaque
+- (BOOL)isOpaque
 {
     return NO;
 }
