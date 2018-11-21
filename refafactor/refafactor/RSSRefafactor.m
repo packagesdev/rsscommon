@@ -45,7 +45,17 @@
 							   @"RSSWindow",
 							   @"RSSCollectionViewItemLabel",
 							   @"RSSCollectionViewItem",
-							   @"RSSCollectionView"];
+							   @"RSSCollectionView",
+							   
+							   // Cheating with categories and methods too
+							   
+							   @"LabelColor_RSS",
+							   @"RSS_labelColor",
+							   @"RSS_secondaryLabelColor",
+							   @"RSS_tertiaryLabelColor",
+							   @"RSS_quaternaryLabelColor",
+							   @"RSS_containerBorderColor",
+							   ];
 		
 		_renamableFiles=@[@"RSSAboutBoxWindowController.nib"];
 	}
