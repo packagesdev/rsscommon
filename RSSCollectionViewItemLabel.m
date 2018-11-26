@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2015, Stephane Sudre
+ Copyright (c) 2015-2018, Stephane Sudre
  All rights reserved.
  
  Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
@@ -12,6 +12,10 @@
  */
 
 #import "RSSCollectionViewItemLabel.h"
+
+#ifndef NSAppKitVersionNumber10_13
+#define NSAppKitVersionNumber10_13 1561.0
+#endif
 
 #define RSSCOLLECTIONVIEWITEMLABEL_TEXT_INSET	4.0
 
@@ -80,7 +84,7 @@
 
 			
 			sUnselectedAttributesDictionary=@{
-											  NSForegroundColorAttributeName : [NSColor blackColor],
+											  NSForegroundColorAttributeName : [NSColor textColor],
 											  NSParagraphStyleAttributeName : tMutableParagraphStyle,
 											  NSFontAttributeName : [NSFont systemFontOfSize:11.0]
 											  };
@@ -110,13 +114,22 @@
 		
 		NSBezierPath * tBezierPath=[NSBezierPath bezierPathWithRoundedRect:tRoundRect xRadius:tRadius yRadius:tRadius];
 		
-		[[NSColor colorWithDeviceRed:78.0/255.0 green:168.0/255.0 blue:229.0/255.0 alpha:1.0] setFill];
-		
-		[tBezierPath fill];
-		
-		[[NSColor colorWithDeviceRed:40.0/255.0 green:130.0/255.0 blue:191.0/255.0 alpha:1.0] setStroke];
-		
-		[tBezierPath stroke];
+		if (NSAppKitVersionNumber<NSAppKitVersionNumber10_13)
+		{
+			[[NSColor colorWithDeviceRed:78.0/255.0 green:168.0/255.0 blue:229.0/255.0 alpha:1.0] setFill];
+			
+			[tBezierPath fill];
+			
+			[[NSColor colorWithDeviceRed:40.0/255.0 green:130.0/255.0 blue:191.0/255.0 alpha:1.0] setStroke];
+			
+			[tBezierPath stroke];
+		}
+		else
+		{
+			[[NSColor alternateSelectedControlColor] setFill];
+			
+			[tBezierPath fill];
+		}
 	}
 	
 	[tString drawInRect:NSMakeRect(NSMinX(tRoundRect)+tRadius+RSSCOLLECTIONVIEWITEMLABEL_TEXT_INSET,NSMinY(tRoundRect)-0.5,NSWidth(tRoundRect)-2*(tRadius+RSSCOLLECTIONVIEWITEMLABEL_TEXT_INSET),NSHeight(tBoundingRect)) withAttributes:tAttributes];
